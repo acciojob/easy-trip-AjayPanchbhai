@@ -22,7 +22,7 @@ public class Passenger {
     @Column(name = "age")
     private Integer age;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "flight")
     @JsonManagedReference
     private Flight flight;
