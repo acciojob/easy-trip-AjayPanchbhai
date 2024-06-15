@@ -1,17 +1,50 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "passengers")
 public class Passenger {
 
-    private int passengerId; //This is a unique key for Passenger model :
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "passenger_id", nullable = false, unique = true)
+    private Integer passengerId; //This is a unique key for Passenger model :
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "name")
     private String name;
 
-    private int age;
+    @Column(name = "age")
+    private Integer age;
+
+    @OneToMany
+    @JoinColumn(name = "flight")
+    @JsonManagedReference
+    private Flight flight;
 
     public Passenger() {
 
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setPassengerId(Integer passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public Passenger(int passengerId, String email, String name, int age) {
